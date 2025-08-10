@@ -52,3 +52,7 @@ CodeCoverage/
 *.VisualState.xml
 TestResult.xml
 nunit-*.xml
+/src/.vs/ecommerce-modulith/CopilotIndices/17.14.878.3237
+/src/.vs/ecommerce-modulith/FileContentIndex
+/src/.vs/ecommerce-modulith/v17
+/src/.vs/ProjectEvaluation
