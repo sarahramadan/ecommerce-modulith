@@ -10,6 +10,7 @@ namespace Catalog
     {
         public static IServiceCollection AddCatalogModule(this IServiceCollection service, IConfiguration configuration)
         {
+ 
             // OR  var configuration = serviceProvider.GetRequiredService<IConfiguration>();
             service.AddDbContext<CatalogDbContext>(options =>
             {
@@ -26,12 +27,13 @@ namespace Catalog
                     options.EnableDetailedErrors();
                 }
             });
-
+            service.AddScoped<IDataSeeder, CatalogDataSeed>(); // Register the data seeder for catalog module  
             return service;
         }
 
         public static IApplicationBuilder UseCatalogModule(this IApplicationBuilder app)
         {
+            app.UseMigration<CatalogDbContext>(); // Apply migrations at startup
             return app;
         }
 

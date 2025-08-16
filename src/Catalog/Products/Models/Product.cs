@@ -6,12 +6,14 @@
         public string ProductDescription { get; set; } = default!;
         public string ImageURL { get; set; } = default!;
         public decimal Price { get; set; }
+        public Guid? CategoryId { get; set; }
+        public Category Category { get; set; }
 
-        public Product Create(string productName, string productDescription, string imageURL, decimal price)
+        public Product Create(string productName, string productDescription, string imageURL, decimal price,Guid? Id = null)
         {
             var newProduct = new Product
             {
-                Id = Guid.NewGuid(),
+                Id = Id??Guid.NewGuid(),
                 ProductName = productName,
                 ProductDescription = productDescription,
                 ImageURL = imageURL,
