@@ -1,13 +1,15 @@
 using Basket;
 using Catalog;
 using Order;
+using Shared;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddBasketModule()
     .AddCatalogModule(builder.Configuration)
-    .AddOrderModule();
+    .AddOrderModule()
+    .AddSharedModule();
 
 
 builder.Services.AddControllers();

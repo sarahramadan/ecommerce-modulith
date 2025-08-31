@@ -5,3 +5,4 @@ global using Shared.DDD;
 global using Shared.Data;
 global using Catalog.Categories.Models;
 global using Catalog.Data.Seed;
+global using Shared;

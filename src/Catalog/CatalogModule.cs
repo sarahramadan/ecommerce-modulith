@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -10,7 +11,8 @@ namespace Catalog
     {
         public static IServiceCollection AddCatalogModule(this IServiceCollection service, IConfiguration configuration)
         {
- 
+            service.AddScoped<IDataSeeder, CatalogDataSeed>(); // Register the data seeder for catalog module  
+
             // OR  var configuration = serviceProvider.GetRequiredService<IConfiguration>();
             service.AddDbContext<CatalogDbContext>(options =>
             {
@@ -26,8 +28,11 @@ namespace Catalog
                     options.EnableSensitiveDataLogging();
                     options.EnableDetailedErrors();
                 }
+                options.AddInterceptors(service.BuildServiceProvider().GetRequiredService<IInterceptor>());
+                //options.AddInterceptors(new Shared.Data.AuditDbContextInterceptor(service.BuildServiceProvider().GetRequiredService<Shared.Auth.IAuthorization>()));
             });
-            service.AddScoped<IDataSeeder, CatalogDataSeed>(); // Register the data seeder for catalog module  
+
+
             return service;
         }
 
